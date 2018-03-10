@@ -26,7 +26,7 @@ $("button").on("click", function() {
     var person = $(this).attr("data-person");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
       person + "&api_key=SxgQtpHMCv3gvMIkC1Yrt5whcQt0vVVV&limit=10";
-    
+    //create first div images
     if (firstFighter===0){
     firstFighter = person
       $.ajax({
@@ -54,6 +54,7 @@ $("button").on("click", function() {
 
           $("#character-1").prepend(gifDiv);
           //play and pause
+          //Can't figure out why this function is only working on every other gif
           $(".gif").on("click", function() {
 
             var state = $(this).attr("data-state");
@@ -64,9 +65,9 @@ $("button").on("click", function() {
               $(this).attr("src", $(this).attr("data-still"));
               $(this).attr("data-state", "still");
             }
-          });    
+          });   
         }
-      
+        
     });
     }
     //create second fighter
@@ -96,19 +97,20 @@ $("button").on("click", function() {
               gifDiv.prepend(personImage);
                     
               $("#character-2").prepend(gifDiv);
-                //play and pause
-              $(".gif").on("click", function() {
-
-                var state = $(this).attr("data-state");
-                if (state === "still") {
-                  $(this).attr("src", $(this).attr("data-animate"));
-                  $(this).attr("data-state", "animate");
-                } else {
-                  $(this).attr("src", $(this).attr("data-still"));
-                  $(this).attr("data-state", "still");
-                }
-              });   
+            
             }  
+                //play and pause
+                $(".gif").on("click", function() {
+
+                  var state = $(this).attr("data-state");
+                  if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                  } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                  }
+                });   
             //winner function
             if (firstFighter > secondFighter) {
                 var firstWin = $("<h2>");
